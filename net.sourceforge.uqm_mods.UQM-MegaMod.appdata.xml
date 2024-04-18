@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>net.sourceforge.uqm_mods.UQM-MegaMod</id>
+
+	<name>The Ur-Quan Masters HD MegaMod</name>
+	<summary>Mod for The Ur-Quan Masters</summary>
+
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-2.0-or-later AND CC-BY-NC-SA-2.5</project_license>
+
+	<categories>
+		<category>Game</category>
+		<category>AdventureGame</category>
+	</categories>
+
+	<supports>
+		<control>keyboard</control>
+		<control>gamepad</control>
+	</supports>
+
+	<keywords>
+		<keyword>UQM</keyword>
+		<keyword>UQMHD</keyword>
+		<keyword>hd-mod</keyword>
+		<keyword>hdmod</keyword>
+		<keyword>Ur-Quan</keyword>
+		<keyword>Masters</keyword>
+		<keyword>MegaMod</keyword>
+	</keywords>
+
+	<description>
+		<p>Here you will find The Ur-Quan Masters HD MEGAMOD, a mod that takes the best of the Ur-Quan
+			Master's mods and rolls them up into one big "Mega" mod. Building upon the latest Ur-Quan
+			Masters source code I've made an expansive mod which includes HD-mod, HD-Remix,
+			Nic's Extended mod, and my personal mods which range from quality of life changes and extra
+			modes to making the HD portions of the game look more faithful to the original design. Though
+			not everything is going to be perfect and a few things will still stand out. I believe classic
+			Star Control II fans will favor this version over the previous incarnation of the HD-mod.</p>
+	</description>
+
+	<launchable type="desktop-id">net.sourceforge.uqm_mods.UQM-MegaMod.desktop</launchable>
+
+	<url type="homepage">https://uqm-mods.sourceforge.net</url>
+	<url type="bugtracker">https://github.com/JHGuitarFreak/UQM-MegaMod/issues</url>
+	<url type="vcs-browser">https://github.com/JHGuitarFreak/UQM-MegaMod</url>
+	<url type="contribute">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/master/Contributing</url>
+	<url type="donation">https://ko-fi.com/jhguitarfreak</url>
+	<url type="help">https://discord.gg/rtaZH7cq8e</url>
+
+	<screenshots>
+		<screenshot type="default">
+			<caption>Welcome to Sol</caption>
+			<image>https://uqm-mods.sourceforge.net/Images/MegaMod/01%20Sol.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Scanning Mercury</caption>
+			<image>https://uqm-mods.sourceforge.net/Images/MegaMod/02%20Mercury.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>The Ur-Quan Warning</caption>
+			<image>https://uqm-mods.sourceforge.net/Images/MegaMod/03%20The%20Ur-Quan%20Warning.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Blown away!</caption>
+			<image>https://uqm-mods.sourceforge.net/Images/MegaMod/09%20Fight!.png</image>
+		</screenshot>
+	</screenshots>
+
+	<developer_name>JHGuitarFreak</developer_name>
+
+	<content_rating type="oars-1.1" />
+	
+	<releases>
+		<release version="0.8.3" date="2024-04-11">
+			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.3/doc/release/CHANGELOG.txt</url>
+			<description>
+				<p>THE PROCESS IS INCOMPLETE, YET WE HAVE EMERGED</p>
+				<ul>
+					<li>The ability to change graphics and music options without restarting!</li>
+					<li>Advanced Auto-Pilot which can traverse the shortest past through QuasiSpace!</li>
+					<li>An option to resume all music where it last left off, instead of repeating from the beginning for every instance.</li>
+					<li>SC1-Styled ship info screens when using PC slides for cutscenes, orchestrated by Kruzen.</li>
+					<li>Switch between DOS, 3DO, and UQM "Platform UI" (Making MegaMod look like those respective versions).</li>
+					<li>A plethora of HD changes made by Kruzen to be more faithful to their SD counterparts.</li>
+					<li>Even more font work! All the UI fonts have been overhauled and some new fonts for the Ilwrath, Spathi, and Ur-Quan.</li>
+					<li>And much more!</li>
+				</ul>
+			</description>
+		  </release>
+		<release version="0.8.2" date="2022-11-13">
+			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.2/doc/release/CHANGELOG.txt</url>
+			<description>
+				<p>Hail Fellow and Well Met. We trust that your seed distributes widely.</p>
+				<ul>
+					<li>We can now load kerning data for fonts from a 'kerndat.fnt' file within a given font's directory</li>
+					<li>Kruzen remade the classic DOS and 3DO spheres while in orbit of a planet</li>
+					<li>Show Auto-Pilot destination and distance to destination at the top of the screen when Smart Auto-Pilot is enabled</li>
+					<li>We added the ability to toggle reticules over stars of interest using the ALT key on the StarMap</li>
+					<li>Optional "Slaughter Mode" which lets you affect select alien race's Sphere of Influence by destroying their ships in battle</li>
+					<li>Point of no return fuel indicator is now a proper ellipse thanks to Malin and Kruzen</li>
+					<li>And much more!</li>
+				</ul>
+			</description>
+		  </release>
+	</releases>
+</component>
