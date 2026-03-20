@@ -3,7 +3,7 @@
 	<id>net.sourceforge.uqm_mods.UQM-MegaMod</id>
 
 	<name>The Ur-Quan Masters HD MegaMod</name>
-	<summary>Mod for The Ur-Quan Masters</summary>
+	<summary>A standalone Mod for The Ur-Quan Masters</summary>
 
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-2.0-or-later AND CC-BY-NC-SA-2.5</project_license>
@@ -34,8 +34,7 @@
 			Masters source code I've made an expansive mod which includes HD-mod, HD-Remix,
 			Nic's Extended mod, and my personal mods which range from quality of life changes and extra
 			modes to making the HD portions of the game look more faithful to the original design. Though
-			not everything is going to be perfect and a few things will still stand out. I believe classic
-			Star Control II fans will favor this version over the previous incarnation of the HD-mod.</p>
+			not everything is going to be perfect and a few things will still stand out.</p>
 	</description>
 
 	<launchable type="desktop-id">net.sourceforge.uqm_mods.UQM-MegaMod.desktop</launchable>
@@ -44,7 +43,6 @@
 	<url type="bugtracker">https://github.com/JHGuitarFreak/UQM-MegaMod/issues</url>
 	<url type="vcs-browser">https://github.com/JHGuitarFreak/UQM-MegaMod</url>
 	<url type="contribute">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/master/Contributing</url>
-	<url type="donation">https://ko-fi.com/jhguitarfreak</url>
 	<url type="help">https://discord.gg/rtaZH7cq8e</url>
 
 	<screenshots>
@@ -71,6 +69,23 @@
 	<content_rating type="oars-1.1" />
 	
 	<releases>
+		<release version="0.8.4" date="2026-03-20">
+			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.4/MegaMod Changelog.txt</url>
+			<description>
+				<p>Captain! A special deal, a bargain unequalled!</p>
+				<ul>
+					<li>StarSeed Mode - Shuffles the locations of all plot events, homeworlds, fleet locations, artifacts, and even planetary resources into an entirely new starmap with 3DO voice support!</li>
+					<li>ShipSeed - Randomizes which ships alien races have access to (within three tiers) based on your custom seed when starting a new game</li>
+					<li>Storage Queue - A proper ship storage system at the starbase; gift ships automatically go into storage if your fleet is full</li>
+					<li>Fleet Point System - A new optional challenge that limits your fleet by max melee point value</li>
+					<li>QuickSave/QuickLoad - F3 and F4 keys for instant saving and loading</li>
+					<li>Lander Cargo Scatter - When your lander explodes, a percentage of its cargo scatters onto the planet's surface</li>
+					<li>Full Visual Lander Upgrades - When enabled currently owned lander modifications will appear on lander sprites during planetside</li>
+					<li>Full SDL2 gamepad support - Anything that SDL2 supports MegaMod now does too, including hotplugging so you connect a gamepad after the game loads</li>
+					<li>And much more!</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.8.3" date="2024-04-11">
 			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.3/doc/release/CHANGELOG.txt</url>
 			<description>
@@ -86,7 +101,7 @@
 					<li>And much more!</li>
 				</ul>
 			</description>
-		  </release>
+		</release>
 		<release version="0.8.2" date="2022-11-13">
 			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.2/doc/release/CHANGELOG.txt</url>
 			<description>
