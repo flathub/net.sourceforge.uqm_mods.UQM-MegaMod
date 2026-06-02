@@ -28,6 +28,11 @@
 		<keyword>MegaMod</keyword>
 	</keywords>
 
+	<branding>
+		<color type="primary" scheme_preference="light">#f3f3f3</color>
+		<color type="primary" scheme_preference="dark">#191919</color>
+	</branding>
+
 	<description>
 		<p>Here you will find The Ur-Quan Masters HD MEGAMOD, a mod that takes the best of the Ur-Quan
 			Master's mods and rolls them up into one big "Mega" mod. Building upon the latest Ur-Quan

@@ -1,33 +1,56 @@
 id: net.sourceforge.uqm_mods.UQM-MegaMod
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: UrQuanMasters
 finish-args:
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --share=ipc
   - --device=all
   - --socket=pulseaudio
   - --share=network
   - --persist=.uqm-megamod
 modules:
-  - name: UQM-MegaMod
+  - name: sdl2 # v2.32.10
     buildsystem: simple
     build-commands:
-      - echo >config.state CHOICE_debug_VALUE='nodebug'
-      - echo >>config.state INPUT_install_prefix_VALUE='/app'
-      - echo >>config.state INPUT_install_bindir_VALUE='/app/bin'
-      - ./build.sh uqm -j
-      - ./build.sh uqm install
-      - install -D mm-0.8.4-content.uqm /app/share/uqm-megamod/content/packages/mm-0.8.4-content.uqm
-      - install -D mm-0.8.4-3dovoice.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-3dovoice.uqm
-      - install -D mm-0.8.4-hd-content.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-hd-content.uqm
-      - install -D uqm-0.8.0-3DOMusicRemastered.uqm /app/share/uqm-megamod/content/addons/uqm-0.8.0-3DOMusicRemastered.uqm
-      - install -D uqm-0.8.0-3dovideo.uqm /app/share/uqm-megamod/content/addons/uqm-0.8.0-3dovideo.uqm
-      - install -D mm-0.8.4-dosmode.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-dosmode.uqm
-      - install -D mm-0.8.4-3domode.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-3domode.uqm
-      - install -D mm-0.8.4-volasaurus-remix-pack.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-volasaurus-remix-pack.uqm
-      - install -D gamecontrollerdb.txt /app/share/uqm-megamod/content/gamecontrollerdb.txt
+      - mkdir -p build
+      - cd build && cmake .. -G Ninja
+        -DCMAKE_INSTALL_PREFIX=/app
+        -DSDL_SHARED=OFF
+        -DSDL_STATIC=ON
+        -DSDL_TEST=OFF
+        -DSDL_TESTS=OFF
+      - cd build && ninja
+      - cd build && ninja install
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL/releases/download/release-2.32.10/SDL2-2.32.10.tar.gz
+        sha256: 5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165
+  - name: uqm-megamod # v0.8.5
+    buildsystem: simple
+    build-commands:
+      - cmake . -G Ninja
+        -DCMAKE_BUILD_TYPE="Release"
+        -DSDL2_FOUND=TRUE
+        -DSDL2_LIBRARIES="/app/lib64/libSDL2.a"
+        -DSDL2_INCLUDE_DIRS="/app/include/SDL2"
+        -DSDL2_VERSION="2.32.10"
+        -DSDL_DIR="/app/include/SDL2"
+        -DINSTALL_PREFIX='/app'
+        -DINSTALL_BINDIR='/app/bin'
+      - ninja > ninja.log
+      - ninja install
+      # - install -D mm-0.8.4-content.uqm /app/share/uqm-megamod/content/packages/mm-0.8.4-content.uqm
+      # - install -D mm-0.8.4-3dovoice.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-3dovoice.uqm
+      # - install -D mm-0.8.4-hd-content.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-hd-content.uqm
+      # - install -D uqm-0.8.0-3DOMusicRemastered.uqm /app/share/uqm-megamod/content/addons/uqm-0.8.0-3DOMusicRemastered.uqm
+      # - install -D uqm-0.8.0-3dovideo.uqm /app/share/uqm-megamod/content/addons/uqm-0.8.0-3dovideo.uqm
+      # - install -D mm-0.8.4-dosmode.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-dosmode.uqm
+      # - install -D mm-0.8.4-3domode.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-3domode.uqm
+      # - install -D mm-0.8.4-volasaurus-remix-pack.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-volasaurus-remix-pack.uqm
+      # - install -D gamecontrollerdb.txt /app/share/uqm-megamod/content/gamecontrollerdb.txt
       - install -D src/res/megamod.png /app/share/icons/hicolor/256x256/apps/$FLATPAK_ID.png
       - install -D src/res/megamod.desktop /app/share/applications/$FLATPAK_ID.desktop
       - install -D $FLATPAK_ID.appdata.xml /app/share/appdata/$FLATPAK_ID.appdata.xml
@@ -35,42 +58,41 @@ modules:
       - type: file
         path: net.sourceforge.uqm_mods.UQM-MegaMod.appdata.xml
       - type: git
-        tag: 0.8.4
-        commit: f026257b9dd52a98c0c8041da007f251c32faa7e
+        commit: 1f2616af9099c61a4ffa8c392230248b0de92a68 # Temporary commit for testing only
         url: https://github.com/JHGuitarFreak/UQM-MegaMod.git
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-content.uqm
-        dest-filename: mm-0.8.4-content.uqm
-        sha512: 038ed78c991b74d39cbe601d36fdb265de996069bd3ee0b168e462b53e35b8fcb87c1bde6360db2b80b7e72a33ebb3086d965db90da03b489dea685b467ab7ad
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-3dovoice.uqm
-        dest-filename: mm-0.8.4-3dovoice.uqm
-        sha512: 14059e7cdf45fd7b333d0b53f7e689a43bdac7c6fe3710441f2692a71a512289da711ef1045644c02891eee4dcbf6c416828acaad7389eeba92b6fafafe0f507
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-hd-content.uqm
-        dest-filename: mm-0.8.4-hd-content.uqm
-        sha512: eed19a68399824a92d3d3d9b1cad6a4cf9aa5556d3d3c90cfdd6ec066cda2a683c1b010c7c9404845ba548abf0b785981c904495242896c26cb5aada8087e4ed
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/uqm-0.8.0-3DOMusicRemastered.uqm
-        dest-filename: uqm-0.8.0-3DOMusicRemastered.uqm
-        sha512: 73d5dedfeab9b86a28166ff346df684e6138fe8c7f621b7c530e6bef67c0194b7e7c505793ea8066551693b787003bd2936deff811894649a5737ceb58f48a7e
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/uqm-0.8.0-3dovideo.uqm
-        dest-filename: uqm-0.8.0-3dovideo.uqm
-        sha512: 128fd61a5205db950cc115f0de7d87f6a2bcc22058725f4eb53296695613d4b862adfc530b3a2e1999a5b1cd288f16de8c2837adb066d791b411997b0eca7391
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-dosmode.uqm
-        dest-filename: mm-0.8.4-dosmode.uqm
-        sha512: 4656c1375276daf3b1c3a0d96ce54f97053c92805dc41d437c9e7d4623c5f1ad3bafb53f0bf14a1f8d81e7161c4a386ff0ad309e4afae2add84dc89fc278ee75
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-3domode.uqm
-        dest-filename: mm-0.8.4-3domode.uqm
-        sha512: 0729ce2bb4337b7287adf06f013fe99985f9f7a9bc049bce201e5db1f41275449b8ebd96bdf89cf0ca2af3881364ce81dc13a4309d64d70c20ccc986deecc052
-      - type: file
-        url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-volasaurus-remix-pack.uqm
-        dest-filename: mm-0.8.4-volasaurus-remix-pack.uqm
-        sha512: ff3781413595bfb27dbd992f36aee1c605fd991825ae0c8900194375123e020ca5fde3e75097e4d0f69d88dddf2d18068696e01e5820b010edd9dc3522711780
-      - type: file
-        url: https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod-Content/refs/tags/0.8.4/gamecontrollerdb.txt
-        dest-filename: gamecontrollerdb.txt
-        sha512: 68127540dc3a8a77d2655c2154307a99e7c249b0520c383b807217c8195fece13e9e0a5efa65d21f2a2eb02ada87d1eb16d65c248097832cc6d51107a93f370f
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-content.uqm
+      #   dest-filename: mm-0.8.4-content.uqm
+      #   sha512: 038ed78c991b74d39cbe601d36fdb265de996069bd3ee0b168e462b53e35b8fcb87c1bde6360db2b80b7e72a33ebb3086d965db90da03b489dea685b467ab7ad
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-3dovoice.uqm
+      #   dest-filename: mm-0.8.4-3dovoice.uqm
+      #   sha512: 14059e7cdf45fd7b333d0b53f7e689a43bdac7c6fe3710441f2692a71a512289da711ef1045644c02891eee4dcbf6c416828acaad7389eeba92b6fafafe0f507
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-hd-content.uqm
+      #   dest-filename: mm-0.8.4-hd-content.uqm
+      #   sha512: eed19a68399824a92d3d3d9b1cad6a4cf9aa5556d3d3c90cfdd6ec066cda2a683c1b010c7c9404845ba548abf0b785981c904495242896c26cb5aada8087e4ed
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/uqm-0.8.0-3DOMusicRemastered.uqm
+      #   dest-filename: uqm-0.8.0-3DOMusicRemastered.uqm
+      #   sha512: 73d5dedfeab9b86a28166ff346df684e6138fe8c7f621b7c530e6bef67c0194b7e7c505793ea8066551693b787003bd2936deff811894649a5737ceb58f48a7e
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/uqm-0.8.0-3dovideo.uqm
+      #   dest-filename: uqm-0.8.0-3dovideo.uqm
+      #   sha512: 128fd61a5205db950cc115f0de7d87f6a2bcc22058725f4eb53296695613d4b862adfc530b3a2e1999a5b1cd288f16de8c2837adb066d791b411997b0eca7391
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-dosmode.uqm
+      #   dest-filename: mm-0.8.4-dosmode.uqm
+      #   sha512: 4656c1375276daf3b1c3a0d96ce54f97053c92805dc41d437c9e7d4623c5f1ad3bafb53f0bf14a1f8d81e7161c4a386ff0ad309e4afae2add84dc89fc278ee75
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-3domode.uqm
+      #   dest-filename: mm-0.8.4-3domode.uqm
+      #   sha512: 0729ce2bb4337b7287adf06f013fe99985f9f7a9bc049bce201e5db1f41275449b8ebd96bdf89cf0ca2af3881364ce81dc13a4309d64d70c20ccc986deecc052
+      # - type: file
+      #   url: https://download.sourceforge.net/project/uqm-mods/MegaMod/0.8.4/Content/mm-0.8.4-volasaurus-remix-pack.uqm
+      #   dest-filename: mm-0.8.4-volasaurus-remix-pack.uqm
+      #   sha512: ff3781413595bfb27dbd992f36aee1c605fd991825ae0c8900194375123e020ca5fde3e75097e4d0f69d88dddf2d18068696e01e5820b010edd9dc3522711780
+      # - type: file
+      #   url: https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod-Content/refs/tags/0.8.4/gamecontrollerdb.txt
+      #   dest-filename: gamecontrollerdb.txt
+      #   sha512: 68127540dc3a8a77d2655c2154307a99e7c249b0520c383b807217c8195fece13e9e0a5efa65d21f2a2eb02ada87d1eb16d65c248097832cc6d51107a93f370f
