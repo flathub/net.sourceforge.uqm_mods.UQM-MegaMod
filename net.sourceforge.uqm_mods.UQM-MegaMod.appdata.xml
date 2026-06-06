@@ -28,6 +28,11 @@
 		<keyword>MegaMod</keyword>
 	</keywords>
 
+	<branding>
+		<color type="primary" scheme_preference="light">#f3f3f3</color>
+		<color type="primary" scheme_preference="dark">#191919</color>
+	</branding>
+
 	<description>
 		<p>Here you will find The Ur-Quan Masters HD MEGAMOD, a mod that takes the best of the Ur-Quan
 			Master's mods and rolls them up into one big "Mega" mod. Building upon the latest Ur-Quan
@@ -69,6 +74,22 @@
 	<content_rating type="oars-1.1" />
 	
 	<releases>
+		<release version="0.8.5" date="2026-06-06">
+			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.5/MegaMod Changelog.txt</url>
+			<description>
+				<p>We did. You did. Yes we can. No.</p>
+				<ul>
+					<li>Added two optional directional joystick control types for gamepads, first type only turns the ship towards intended facing (you press the thrust key/button), 
+							and the second type auto-thrusts into the intended direction (partial stick push turns the ship towards intended facing without thrusting). 
+							Along with the being able choose your stick preference (left or right stick)</li>
+					<li>Full control rebinding, not just ship controls, but every bind used by the game.</li>
+					<li>Deadzone editing for gamepad left and right sticks.</li>
+					<li>Auto-switching button icons based on last input from Player 1</li>
+					<li>STARSEED: Fixed Ur-Quan crash site and Utwig Bomb locations not having the proper amount of worlds</li>
+					<li>Fixed visual glitches in Linux by making it statically link proper SDL 2.32.10 (not sdl2-compat) when compiling and adding "--renderer=opengles2" to the Linux wrapper script</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.8.4" date="2026-03-20">
 			<url type="details">https://raw.githubusercontent.com/JHGuitarFreak/UQM-MegaMod/0.8.4/MegaMod Changelog.txt</url>
 			<description>
