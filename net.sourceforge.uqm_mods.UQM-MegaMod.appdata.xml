@@ -81,7 +81,7 @@
 				<ul>
 					<li>Added two optional directional joystick control types for gamepads, first type only turns the ship towards intended facing (you press the thrust key/button), 
 							and the second type auto-thrusts into the intended direction (partial stick push turns the ship towards intended facing without thrusting). 
-							Along with the being able choose your stick preference (left or right stick)
+							Along with the being able choose your stick preference (left or right stick)</li>
 					<li>Full control rebinding, not just ship controls, but every bind used by the game.</li>
 					<li>Deadzone editing for gamepad left and right sticks.</li>
 					<li>Auto-switching button icons based on last input from Player 1</li>

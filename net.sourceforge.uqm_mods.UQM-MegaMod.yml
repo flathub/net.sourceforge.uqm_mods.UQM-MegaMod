@@ -3,6 +3,7 @@ runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: UrQuanMasters
+
 finish-args:
   - --socket=wayland
   - --socket=fallback-x11
@@ -11,37 +12,51 @@ finish-args:
   - --socket=pulseaudio
   - --share=network
   - --persist=.uqm-megamod
+
+cleanup:
+  - /include
+  - /lib
+
 modules:
-  - name: sdl2 # v2.32.10
-    buildsystem: simple
-    build-commands:
-      - mkdir -p build
-      - cd build && cmake .. -G Ninja
-        -DCMAKE_INSTALL_PREFIX=/app
-        -DSDL_SHARED=OFF
-        -DSDL_STATIC=ON
-        -DSDL_TEST=OFF
-        -DSDL_TESTS=OFF
-      - cd build && ninja
-      - cd build && ninja install
+
+  # SDL v2.32.10
+  - name: sdl2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_INSTALL_PREFIX=/app
+      - -DSDL_SHARED=OFF
+      - -DSDL_STATIC=ON
+      - -DSDL_TEST=OFF
+      - -DSDL_TESTS=OFF
     sources:
       - type: archive
         url: https://github.com/libsdl-org/SDL/releases/download/release-2.32.10/SDL2-2.32.10.tar.gz
         sha256: 5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165
-  - name: uqm-megamod # v0.8.5
+
+  # UQM-MegaMod v0.8.5
+  - name: uqm-megamod-binary
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DSDL2_FOUND=TRUE
+      - -DSDL2_LIBRARIES=/app/lib/libSDL2.a
+      - -DSDL2_INCLUDE_DIRS=/app/include/SDL2
+      - -DSDL2_VERSION=2.32.10
+      - -DSDL_DIR=/app/include/SDL2
+      - -DINSTALL_PREFIX=/app
+      - -DINSTALL_BINDIR=/app/bin
+    sources:
+      - type: git
+        tag: 0.8.5
+        commit: 1eece12ff9a89d029a5d1f65ead7c75f9ab78acb
+        url: https://github.com/JHGuitarFreak/UQM-MegaMod.git
+
+  # UQM-MegaMod Content
+  - name: uqm-megamod-content
     buildsystem: simple
     build-commands:
-      - cmake . -G Ninja
-        -DCMAKE_BUILD_TYPE="Release"
-        -DSDL2_FOUND=TRUE
-        -DSDL2_LIBRARIES="/app/lib64/libSDL2.a"
-        -DSDL2_INCLUDE_DIRS="/app/include/SDL2"
-        -DSDL2_VERSION="2.32.10"
-        -DSDL_DIR="/app/include/SDL2"
-        -DINSTALL_PREFIX='/app'
-        -DINSTALL_BINDIR='/app/bin'
-      - ninja
-      - ninja install
       - install -D mm-0.8.5-content.uqm /app/share/uqm-megamod/content/packages/mm-0.8.5-content.uqm
       - install -D mm-0.8.4-3dovoice.uqm /app/share/uqm-megamod/content/addons/mm-0.8.4-3dovoice.uqm
       - install -D mm-0.8.5-hd-content.uqm /app/share/uqm-megamod/content/addons/mm-0.8.5-hd-content.uqm
